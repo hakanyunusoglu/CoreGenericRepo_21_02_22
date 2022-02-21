@@ -34,6 +34,10 @@ namespace CoreGenericRepo.Controllers
         {
             if (model.Movies != null)
             {
+                if (model.Movies.MovieImage == null)
+                {
+                    model.Movies.MovieImage = "default.jpg";
+                }
                 repo.Add(model.Movies);
                 repo.Save();
             }
@@ -56,9 +60,16 @@ namespace CoreGenericRepo.Controllers
             {
                 Movie selectedm = repo.Find(id);
 
+                if(model.Movies.MovieImage == null)
+                {
+                    selectedm.MovieImage = "default.jpg";
+                }
+                else
+                {
+                    selectedm.MovieImage = model.Movies.MovieImage;
+                }
                 selectedm.MovieName = model.Movies.MovieName;
-                selectedm.MovieDescription = model.Movies.MovieDescription;
-                selectedm.MovieImage = model.Movies.MovieDescription;
+                selectedm.MovieDescription = model.Movies.MovieDescription;              
                 selectedm.MovieTypeID = model.Movies.MovieTypeID;
                 repo.Save();
                 return RedirectToAction("Index");
