@@ -1,0 +1,55 @@
+﻿@model CoreGenericRepo.Models.DTO.MovieVM
+<br />
+<br />
+<div class="border p-4 bg-white">
+    <div class="row">
+        <div class="col-10">
+            <h2 class="text-info">Film Listesi</h2>
+        </div>
+        <div class="col-2">
+            <a class="btn btn-info form-control" asp-action="Insert">Film Ekle</a>
+        </div>
+    </div>
+    <div>
+        @if (Model.mList.Count() > 0)
+        {
+            <table class="table table-striped border">
+                <tbody>
+                    <tr class="table-secondary">
+                        <th>ID</th>
+                        <th>Adı</th>
+                        <th>Açıklama</th>
+                        <th>Türü</th>
+                        <th colspan="3">İşlemler</th>
+
+
+                        <th></th>
+                    </tr>
+                    @foreach (var item in Model.mList)
+                    {
+                <tr>
+                    <td>@item.MovieID</td>
+                    <td>@item.MovieName</td>
+                    <td>@item.MovieDescription</td>
+                    <td>@item.MovieType.MovieTypeName</td>
+                    <td></td>
+
+                    <td>
+                        <a class="btn btn-primary text-white" asp-action="Update" asp-route-id="@item.MovieID">Update</a>
+                        <a class="btn btn-danger text-white" asp-action="Detail" asp-route-id="@item.MovieID">Detail</a>
+                        <a class="btn btn-danger text-white" asp-action="Delete" asp-route-id="@item.MovieID">Delete</a>
+
+
+                    </td>
+                </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p>Kayıt Bulunamadı!</p>
+        }
+
+    </div>
+</div>
